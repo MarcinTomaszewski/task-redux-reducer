@@ -37,7 +37,7 @@ function comments(state = initialState, action) {
         case EDIT_COMMENT:
             return state.map(comment => {
                 if (comment.id === action.id) {
-                    comment.text = action.id
+                    comment.text = action.text
                 }
                 return comment;
             });
