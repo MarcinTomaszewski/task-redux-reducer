@@ -18,8 +18,8 @@ const initialState = {
     return state;
 }*/
 
-//obsługa pierwszej akcji dodającej komentarze
-function comments(state = initialState, action) {
+//reducer comments
+function comments(state = [], action) {
     switch (action.type) {
         case ADD_COMMENT:
             return [{
@@ -30,31 +30,39 @@ function comments(state = initialState, action) {
                 , ...state.comments];
 
         case REMOVE_COMMENT:
-            return Object.assign({}, state, {
-                comments: state.comments.filter(comment => comment.id !== action.id)
-            });
+            return state.filter(comment => comment.id !== action.id);
+            
 
         case EDIT_COMMENT:
             return state.map(comment => {
                 if (comment.id === action.id) {
-                    comment.text = action.text
-                }
+                    return {
+                        ...comment,
+                        text: action.text
+                    }
+                }   
                 return comment;
             });
             
         case THUMB_UP_COMMENT:
             return state.map(comment => {
                 if (comment.id === action.id) {
-                    comment.handup = comment.handup + 1;
-                }
+                    return {
+                        ...comment,
+                        votes: comment.votes + 1
+                    }
+                }    
                 return comment;
             });
 
         case THUMB_DOWN_COMMENT:
             return state.map(comment => {
                 if (comment.id === action.id) {
-                    comment.handdown = comment.handdown - 1;
-                }
+                    return {
+                        ...comment,
+                        votes: comment.votes -1
+                    }
+                }  
                 return comment;
             });
 
