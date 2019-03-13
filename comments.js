@@ -1,22 +1,12 @@
 //import akcji z pliku action.j
-import { ADD_COMMENT } from './action';
-import { EDIT_COMMENT} from './action';
-import { REMOVE_COMMENT} from './action';
-import { THUMB_UP_COMMENT} from './action';
-import { THUMB_DOWN_COMMENT} from './action';
+import {
+    ADD_COMMENT,
+    EDIT_COMMENT,
+    REMOVE_COMMENT,
+    THUMB_UP_COMMENT,
+    THUMB_DOWN_COMMENT
+} from './action';
 
-//początkowy stan aplikacji. Są dwie niezależne części comments i users.
-const initialState = {
-    comments: [],
-    users =[]
-};
-
-/*function reducer(state, action) {
-    if (!state){
-        return initialState;
-    }
-    return state;
-}*/
 
 //reducer comments
 function comments(state = [], action) {
@@ -31,7 +21,7 @@ function comments(state = [], action) {
 
         case REMOVE_COMMENT:
             return state.filter(comment => comment.id !== action.id);
-            
+
 
         case EDIT_COMMENT:
             return state.map(comment => {
@@ -40,10 +30,10 @@ function comments(state = [], action) {
                         ...comment,
                         text: action.text
                     }
-                }   
+                }
                 return comment;
             });
-            
+
         case THUMB_UP_COMMENT:
             return state.map(comment => {
                 if (comment.id === action.id) {
@@ -51,7 +41,7 @@ function comments(state = [], action) {
                         ...comment,
                         votes: comment.votes + 1
                     }
-                }    
+                }
                 return comment;
             });
 
@@ -60,9 +50,9 @@ function comments(state = [], action) {
                 if (comment.id === action.id) {
                     return {
                         ...comment,
-                        votes: comment.votes -1
+                        votes: comment.votes - 1
                     }
-                }  
+                }
                 return comment;
             });
 
@@ -70,6 +60,30 @@ function comments(state = [], action) {
             return state;
     }
 }
+
+// przykładowy stan aplikacji dla tego zadania
+// {
+//     comments: [
+//         {
+//             id: 12741danx1278,
+//             text: 'Nowy komentarz',
+//             votes: 0
+//         },
+//         {
+//             id: 12741danb1278,
+//             text: 'Stary komentarz',
+//             votes: 42
+//         }
+//     ], 
+//      users: [
+//         {
+//             id: '121jk6d89h2d',
+//             firstName: 'Jan',
+//             lastName: 'Nowak',
+//             comments: ['12741danb1278'],
+//         }, ...
+//     ]
+// }
 
 export default comments;
 

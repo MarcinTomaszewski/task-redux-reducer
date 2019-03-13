@@ -1,4 +1,4 @@
-import uuid from uuid;
+import uuid from 'uuid';
 
 //definicja typów akcji i ich eksport
 export const ADD_COMMENT = 'ADD_COMMENT';
@@ -12,7 +12,8 @@ function addComment(text) {
     return {
         type: ADD_COMMENT,
         text,
-        id: uuid.v4()
+        id: uuid.v4(),
+        votes: 0
     }
 }
 
@@ -20,14 +21,14 @@ function editComment(id, text) {
     return {
         type: EDIT_COMMENT,
         id,
-        text: text        
+        text: text
     }
 }
 
 function removeComment(id) {
     return {
         type: REMOVE_COMMENT,
-        id        
+        id
     }
 }
 
